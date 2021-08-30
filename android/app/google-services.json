@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "706303097028",
+    "firebase_url": "https://cafeapp-54e3c-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "cafeapp-54e3c",
+    "storage_bucket": "cafeapp-54e3c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:706303097028:android:32f3040d650ccac8607191",
+        "android_client_info": {
+          "package_name": "com.alphacsoft.foodapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "706303097028-2mpd0cso2ih9fi6vsfn320vj97s76ip7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4DxuyLZuRud-1HE39PjdkCLpG9wtkL20"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "706303097028-2mpd0cso2ih9fi6vsfn320vj97s76ip7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:706303097028:android:9ef7863415a041c1607191",
+        "android_client_info": {
+          "package_name": "com.example.cafeapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "706303097028-2mpd0cso2ih9fi6vsfn320vj97s76ip7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4DxuyLZuRud-1HE39PjdkCLpG9wtkL20"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "706303097028-2mpd0cso2ih9fi6vsfn320vj97s76ip7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
