@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cafeapp/page/tambah_menu.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
-// import 'dart:html';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class HalamanMenu extends StatefulWidget {
   HalamanMenu({Key? key}) : super(key: key);
@@ -12,12 +12,6 @@ class HalamanMenu extends StatefulWidget {
 }
 
 class _HalamanMenuState extends State<HalamanMenu> {
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     double _widht = MediaQuery.of(context).size.width;
@@ -69,27 +63,35 @@ class _HalamanMenuState extends State<HalamanMenu> {
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(8, 8, 8, 0),
-                                    child: Text(
-                                      snap.data!.docs[index * 2]['name'],
-                                      style: TextStyle(
-                                          fontSize: 30,
-                                          fontWeight: FontWeight.w700),
+                                  Container(
+                                    width: _widht * 0.4,
+                                    child: Padding(
+                                      padding:
+                                          const EdgeInsets.fromLTRB(8, 8, 8, 0),
+                                      child: AutoSizeText(
+                                        snap.data!.docs[index * 2]['name'],
+                                        maxLines: 1,
+                                        style: TextStyle(
+                                            fontSize: 25,
+                                            fontWeight: FontWeight.w700),
+                                      ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(8, 0, 8, 8),
-                                    child: Text(
-                                      f
-                                          .format(snap.data!.docs[index * 2]
-                                              ['sell_price'])
-                                          .toString(),
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w700,
+                                  Container(
+                                    width: _widht * 0.4,
+                                    child: Padding(
+                                      padding:
+                                          const EdgeInsets.fromLTRB(8, 0, 8, 8),
+                                      child: AutoSizeText(
+                                        f
+                                            .format(snap.data!.docs[index * 2]
+                                                ['sell_price'])
+                                            .toString(),
+                                        maxLines: 1,
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w700,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -103,6 +105,7 @@ class _HalamanMenuState extends State<HalamanMenu> {
                             onTap: () {},
                             child: Container(
                               child: Card(
+                                elevation: 5,
                                 color: Color(0xFFecf0f1),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -119,28 +122,37 @@ class _HalamanMenuState extends State<HalamanMenu> {
                                         ),
                                       ),
                                     ),
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.fromLTRB(8, 8, 8, 0),
-                                      child: Text(
-                                        snap.data!.docs[index * 2 + 1]['name'],
-                                        style: TextStyle(
-                                            fontSize: 30,
-                                            fontWeight: FontWeight.w700),
+                                    Container(
+                                      width: _widht * 0.4,
+                                      child: Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            8, 8, 8, 0),
+                                        child: AutoSizeText(
+                                          snap.data!.docs[index * 2 + 1]
+                                              ['name'],
+                                          style: TextStyle(
+                                              fontSize: 25,
+                                              fontWeight: FontWeight.w700),
+                                          maxLines: 1,
+                                        ),
                                       ),
                                     ),
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.fromLTRB(8, 0, 8, 8),
-                                      child: Text(
-                                        f
-                                            .format(
-                                                snap.data!.docs[index * 2 + 1]
-                                                    ['sell_price'])
-                                            .toString(),
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w700,
+                                    Container(
+                                      width: _widht * 0.4,
+                                      child: Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            8, 0, 8, 8),
+                                        child: AutoSizeText(
+                                          f
+                                              .format(
+                                                  snap.data!.docs[index * 2 + 1]
+                                                      ['sell_price'])
+                                              .toString(),
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w700,
+                                          ),
+                                          maxLines: 1,
                                         ),
                                       ),
                                     ),

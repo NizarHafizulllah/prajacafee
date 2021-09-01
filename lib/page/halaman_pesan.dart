@@ -1,27 +1,32 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 
 class HalamanPesan extends StatefulWidget {
-  HalamanPesan({Key? key}) : super(key: key);
+  final num noMeja;
+  HalamanPesan({Key? key, required this.noMeja}) : super(key: key);
 
   @override
   _HalamanPesanState createState() => _HalamanPesanState();
 }
 
 class _HalamanPesanState extends State<HalamanPesan> {
+  var db = FirebaseFirestore.instance;
+
   @override
   Widget build(BuildContext context) {
     double _widht = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Daftar Pesanan"),
+        title: Text("Detail Pesanan Meja ${widget.noMeja.toString()}"),
       ),
       body: SafeArea(
         child: StreamBuilder<QuerySnapshot>(
-          stream: FirebaseFirestore.instance
+          stream: db
               .collection('cart')
               .where("status", isEqualTo: 0)
+              .where("table", isEqualTo: widget.noMeja)
               .snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snap) {
             if (!snap.hasData) {
@@ -48,13 +53,13 @@ class _HalamanPesanState extends State<HalamanPesan> {
                           child: Stack(
                             children: <Widget>[
                               Container(
+                                width: _widht * 0.9,
                                 child: Row(
                                   children: <Widget>[
                                     Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Container(
-                                        width: _widht * 0.4,
-                                        height: 200,
+                                        width: _widht * 0.3,
                                         child: Image.network(
                                           snap.data!.docs[index]['image'],
                                           fit: BoxFit.fill,
@@ -68,29 +73,34 @@ class _HalamanPesanState extends State<HalamanPesan> {
                                         Padding(
                                           padding: const EdgeInsets.fromLTRB(
                                               8, 8, 8, 0),
-                                          child: Text(
+                                          child: AutoSizeText(
                                             "Meja " +
                                                 snap.data!.docs[index]['table']
                                                     .toString(),
                                             style: TextStyle(
-                                                fontSize: 30,
+                                                fontSize: 20,
                                                 fontWeight: FontWeight.w700),
+                                            maxLines: 1,
                                           ),
                                         ),
-                                        Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              8, 8, 8, 0),
-                                          child: Text(
-                                            snap.data!.docs[index]['name'],
-                                            style: TextStyle(
-                                                fontSize: 30,
-                                                fontWeight: FontWeight.w700),
+                                        Container(
+                                          width: _widht * 0.4,
+                                          child: Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                8, 8, 8, 0),
+                                            child: AutoSizeText(
+                                              snap.data!.docs[index]['name'],
+                                              style: TextStyle(
+                                                  fontSize: 30,
+                                                  fontWeight: FontWeight.w700),
+                                              maxLines: 1,
+                                            ),
                                           ),
                                         ),
                                         Padding(
                                           padding: const EdgeInsets.fromLTRB(
                                               8, 0, 8, 8),
-                                          child: Text(
+                                          child: AutoSizeText(
                                             snap.data!.docs[index]['qty']
                                                     .toString() +
                                                 " x " +
@@ -99,6 +109,7 @@ class _HalamanPesanState extends State<HalamanPesan> {
                                                         snap.data!.docs[index]
                                                             ['sell_price'])
                                                     .toString(),
+                                            maxLines: 1,
                                             style: TextStyle(
                                               fontSize: 20,
                                               fontWeight: FontWeight.w700,
@@ -108,13 +119,14 @@ class _HalamanPesanState extends State<HalamanPesan> {
                                         Padding(
                                           padding: const EdgeInsets.fromLTRB(
                                               8, 0, 8, 8),
-                                          child: Text(
+                                          child: AutoSizeText(
                                             f
                                                 .format(snap.data!.docs[index]
                                                     ['total_price'])
                                                 .toString(),
+                                            maxLines: 1,
                                             style: TextStyle(
-                                              fontSize: 20,
+                                              fontSize: 18,
                                               fontWeight: FontWeight.w700,
                                             ),
                                           ),
@@ -135,20 +147,20 @@ class _HalamanPesanState extends State<HalamanPesan> {
                                       onPressed: () async {
                                         await snap.data!.docs[index].reference
                                             .update({"status": 1});
-
-                                        num _total_jual = 0;
+                                        num _totalJumlah = 0;
                                         await FirebaseFirestore.instance
                                             .collection('total')
                                             .doc('penjualan')
                                             .get()
-                                            .then((DocumentSnapshot) {
-                                          _total_jual =
-                                              DocumentSnapshot['total_jual'];
+                                            .then((documentSnapshot) {
+                                          _totalJumlah =
+                                              documentSnapshot['total_jual'];
                                           var _tambahan = snap.data!.docs[index]
                                               ['total_price'];
-                                          _total_jual = _total_jual + _tambahan;
-                                          DocumentSnapshot.reference.update(
-                                              {"total_jual": _total_jual});
+                                          _totalJumlah =
+                                              _totalJumlah + _tambahan;
+                                          documentSnapshot.reference.update(
+                                              {"total_jual": _totalJumlah});
                                           // print(_total_jual);
                                         });
                                         // print(_total_jual.toString());

@@ -10,6 +10,7 @@ class FirebaseApi {
 
       return ref.putFile(file);
     } on FirebaseException catch (e) {
+      print(e);
       return null;
     }
   }
@@ -20,6 +21,7 @@ class FirebaseApi {
 
       return ref.putData(data);
     } on FirebaseException catch (e) {
+      print(e);
       return null;
     }
   }

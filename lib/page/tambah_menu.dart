@@ -107,7 +107,7 @@ class _TambahMenuState extends State<TambahMenu> {
                     var _stringNama = _nama.text;
                     var _angkaHarga = _harga.numberValue;
                     var _kategori = _pilihKategori;
-                    var _pilihan = simpan(_stringNama, _angkaHarga, _kategori);
+                    simpan(_stringNama, _angkaHarga, _kategori);
                   },
                   child: Text(
                     "Simpan",
